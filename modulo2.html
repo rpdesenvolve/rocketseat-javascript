@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curso de Javascript | RocketSeat</title>
+</head>
+<body>
+  <!-- 1º exercício
+  Crie um botão que ao ser clicado cria um novo elemento em tela com a forma de um quadrado
+  vermelho com 100px de altura e largura. Sempre que o botão for clicado um novo quadrado deve
+  aparecer na tela. -->
+  <div id="exe1">
+    <!-- <button onclick="adicionarQuadrado()">Executar exercício 1</button> -->
+  </div>
+  <script>
+    var counterClass = 1;
+    function adicionarQuadrado() {
+      var container = document.querySelector('#exe1');
+
+      var boxElement = document.createElement('div');
+
+      var boxClass = 'box' + counterClass;
+      boxElement.setAttribute('class', boxClass);
+      boxElement.setAttribute('onmouseover', 'changeColor("'+boxClass+'")');
+      boxElement.style.width = '100px';
+      boxElement.style.height = '100px';
+      boxElement.style.backgroundColor = '#f00';
+      boxElement.style.marginBottom = '15px';
+
+      counterClass += 1;
+
+      container.appendChild(boxElement);
+    }
+  </script>
+
+
+  <!-- 2º exercício
+  Utilizando o resultado do primeiro desafio, toda vez que o usuário passar o mouse por cima de
+  algum quadrado troque sua cor para uma cor aleatória gerada pela função abaixo:
+  function getRandomColor() {
+  var letters = "0123456789ABCDEF";
+  var color = "#";
+  for (var i = 0; i < 6; i++) {
+  color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+  }
+  var newColor = getRandomColor(); // #E943F0 -->
+
+  <script>
+  function getRandomColor() {
+    var letters = "0123456789ABCDEF";
+    var color = "#";
+
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  function changeColor(boxClass) {
+    var newColor = getRandomColor();
+
+    var box = document.querySelector("." + boxClass);
+    box.style.backgroundColor = newColor;
+  }
+  </script>
+
+  <!-- 3º exercício
+  A partir do seguinte vetor:
+  var nomes = ["Diego", "Gabriel", "Lucas"];
+  Preencha uma lista (<ul>) no HTML com os itens da seguinte forma:
+  ● Diego
+  ● Gabriel
+  ● Lucas -->
+
+  <div id="exe3"></div>
+
+  <script>
+    function listaNomes() {
+      var nomes = ["Diego", "Gabriel", "Lucas"];
+
+      var container = document.querySelector('#exe3');
+      var lista = document.createElement('ul');
+      container.appendChild(lista);
+
+      for (let index = 0; index < nomes.length; index++) {
+        var item = document.createElement('li');
+
+        var textNode = document.createTextNode(nomes[index]);
+        item.appendChild(textNode);
+
+        lista.appendChild(item);
+      }
+    }
+
+    // listaNomes();
+  </script>
+
+  <!-- 4º exercício
+  Seguindo o resultado do exercício anterior adicione um input em tela e um botão como a seguir:
+  <input type="text" name="nome">
+  <button onClick="adicionar()">Adicionar</button>
+  Ao clicar no botão, a função adicionar() deve ser disparada adicionando um novo item a lista de
+  nomes baseado no nome preenchido no input e renderizando o novo item em tela juntos aos
+  demais itens anteriores. Além disso, o conteúdo do input deve ser apagado após o clique. -->
+
+  <script>
+    function adicionarNovosElementos() {
+      var container = document.querySelector('#exe3');
+
+      var input = document.createElement('input');
+      input.setAttribute('type', 'text');
+      input.setAttribute('name', 'nome');
+      container.appendChild(input);
+
+      var button = document.createElement('button');
+      button.setAttribute('onclick', 'adicionarNome()');
+      var buttonName = document.createTextNode('Adicionar Nome');
+      button.appendChild(buttonName);
+
+      container.appendChild(button);
+    }
+
+    function adicionarNome() {
+      var nome = document.querySelector('input[name=nome]').value;
+
+      var listaNomes = document.querySelector('#exe3 ul');
+
+      var item = document.createElement('li');
+      var textNode = document.createTextNode(nome);
+      item.appendChild(textNode);
+
+      listaNomes.appendChild(item);
+
+    }
+
+    // adicionarNovosElementos();
+  </script>
+
+</body>
+</html>
